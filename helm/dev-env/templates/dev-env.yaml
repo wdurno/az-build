@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dev-env 
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      component: dev-env
+  template:
+    metadata:
+      labels:
+        component: dev-env
+    spec:
+      containers:
+        - name: dev-env
+          image: {{ .Values.image }}
+          securityContext: 
+              privileged: true 
+          volumeMounts: 
+            - name: docker-graph-storage 
+              mountPath: /var/lib/docker 
+            - name: dat-volume 
+              mountPath: /dat
+      volumes: 
+        - name: docker-graph-storage 
+          emptyDir: {}
+        - name: dat-volume
+          emptyDir: {} 

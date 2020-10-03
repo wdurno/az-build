@@ -1,0 +1,13 @@
+echo setting repo dir...
+export repo_dir=/build/az-build
+
+echo docker login...
+. ${repo_dir}/scripts/acr-login.sh 
+
+echo get docker server...
+export SERVER=$(cat ${repo_dir}/secret/acr/server) 
+echo $SERVER
+
+echo building dev-env...
+cd ${repo_dir}/dev-env 
+. docker-build-and-push.sh 
