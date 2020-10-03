@@ -27,3 +27,4 @@ RUN apk --update --no-cache add \
     ## az
     pip install azure-cli 
 
+ADD prep-dev-env-ssh.sh /root/prep-dev-env-ssh.sh

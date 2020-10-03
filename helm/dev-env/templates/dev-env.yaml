@@ -22,8 +22,15 @@ spec:
               mountPath: /var/lib/docker 
             - name: dat-volume 
               mountPath: /dat
+            - name: ssh-key-volume
+              mountPath: /root/ssh 
+      imagePullSecrets:
+        - name: acr-creds
       volumes: 
         - name: docker-graph-storage 
           emptyDir: {}
         - name: dat-volume
           emptyDir: {} 
+        - name: ssh-key-volume
+          secret:
+            secretName: ssh-key
